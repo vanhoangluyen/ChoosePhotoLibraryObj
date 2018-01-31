@@ -33,8 +33,7 @@
     [self presentViewController:self.imgPicker animated:YES completion:nil];
 }
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    UIImage *chooseImage = info[UIImagePickerControllerEditedImage];
-    self.imageView.image = chooseImage;
+    self.imageView.image = info[UIImagePickerControllerEditedImage];
     [self.imgPicker dismissViewControllerAnimated:YES completion:nil];
 }
 
