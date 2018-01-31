@@ -9,7 +9,8 @@
 #import "ViewController.h"
 
 @interface ViewController ()
-
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (nonatomic, strong) UIImagePickerController *imgPicker;
 @end
 
 @implementation ViewController
@@ -23,6 +24,18 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (IBAction)selectImageFromPhotoLibrary:(UITapGestureRecognizer *)sender {
+    self.imgPicker = [[UIImagePickerController alloc] init];
+    self.imgPicker.delegate = self;
+    self.imgPicker.allowsEditing = YES ;
+    self.imgPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    [self presentViewController:self.imgPicker animated:YES completion:nil];
+}
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    UIImage *chooseImage = info[UIImagePickerControllerEditedImage];
+    self.imageView.image = chooseImage;
+    [self.imgPicker dismissViewControllerAnimated:YES completion:nil];
 }
 
 
